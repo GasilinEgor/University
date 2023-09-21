@@ -7,7 +7,7 @@ public class TestAuthor {
         System.out.println(author.getEmail());
         System.out.println(author.getGenger());
         author.setEmail("eg.gasilin@yandex.ru");
-        System.out.println(author.toString());
+        System.out.println(author);
     }
 }
 
