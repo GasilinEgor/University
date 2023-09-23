@@ -6,6 +6,9 @@ public class HowMamy {
         Scanner scanner = new Scanner(System.in);
         System.out.println("введите строку");
         String s = scanner.nextLine();
+        while (s.contains("  ")) {
+            s = s.replace("  ", " ");
+        }
         String[] words = s.split(" ");
         System.out.println(words.length);
     }
