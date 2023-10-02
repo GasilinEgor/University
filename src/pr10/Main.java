@@ -5,18 +5,25 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Student[] iDNumber = new Student[0];
+        Student[] iDNumber1 = new Student[0], iDNumber2 = new Student[0], iDNumber = new Student[5];
         Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < 5; i++) {
-            iDNumber = setArray(iDNumber);
+        for (int i = 0; i < 2; i++) {
+            iDNumber1 = setArray(iDNumber1);
+        }
+        for (int i = 0; i < 3; i++) {
+            iDNumber2 = setArray(iDNumber2);
         }
         System.out.println("Если хотите отсортировать по среднему баллу, введите 1, если по фамилии - 2");
         int change = scanner.nextInt();
         if (change == 1) {
-            MergeSort(iDNumber, new StudentComparator(1));
+            MergeSort(iDNumber1, new StudentComparator(1));
+            MergeSort(iDNumber2, new StudentComparator(1));
+            merge(iDNumber, iDNumber1, iDNumber2, new StudentComparator(1));
         }
         else {
-            MergeSort(iDNumber, new StudentComparator(2));
+            MergeSort(iDNumber1, new StudentComparator(2));
+            MergeSort(iDNumber2, new StudentComparator(2));
+            merge(iDNumber, iDNumber1, iDNumber2, new StudentComparator(2));
         }
         outArray(iDNumber);
     }
