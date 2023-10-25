@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class first {
     public static void main(String[] args) {
-        Pattern pattern = Pattern.compile("(\\d+\\s?(USD|RUB|EU))");
+        Pattern pattern = Pattern.compile("(\\d+\\.?\\d{0,2}\\s?(USD|RUB|EU))");
         Scanner scanner = new Scanner(System.in);
         String[] costs = new String[0];
         String cost;
@@ -14,8 +14,11 @@ public class first {
         for (int i = -1; i < count; i++) {
             cost = scanner.nextLine();
             Matcher matcher = pattern.matcher(cost);
-            while (matcher.find()) {
-                System.out.println(cost);
+            if (matcher.matches()) {
+                System.out.println("Правильно");
+            }
+            else {
+                System.out.println("Неправильно");
             }
         }
     }
