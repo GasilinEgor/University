@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Test extends JFrame {
+public class first extends JFrame {
     JTextField jta1 = new JTextField(10);
     JTextField jta2 = new JTextField(10);
     JButton buttonPlus = new JButton("Сложить");
@@ -13,9 +13,10 @@ public class Test extends JFrame {
     JButton buttonDivide = new JButton("Разделить");
     Font fnt = new Font("Times new roman", Font.BOLD, 20);
 
-    Test() {
+    first() {
         super("Test");
         setTitle("Example");
+        setResizable(false);
         setLayout(new FlowLayout());
         setSize(250, 150);
         add(new JLabel("1st Number"));
@@ -83,6 +84,6 @@ public class Test extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Test();
+        new first();
     }
 }

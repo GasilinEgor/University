@@ -6,7 +6,7 @@ import java.awt.*;
 public class third extends JFrame {
     JButton button1 = new JButton("Кнопка 1");
     JButton button2 = new JButton("Кнопка 2");
-    JTextField textField = new JTextField("Здесь вы можете ввести свой текст", 20);
+    JTextField textField = new JTextField(20);
     JMenuBar bar = new JMenuBar();
     JMenu file = new JMenu("Файл");
     JMenuItem save = new JMenuItem("Сохранить");
