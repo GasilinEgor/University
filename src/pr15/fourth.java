@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,11 +46,22 @@ public class fourth extends JFrame  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String line = textField.getText();
-                Pattern pattern = Pattern.compile("[0-9]+.[0-9]+");
+                Pattern pattern = Pattern.compile("\\d+\\.?\\d*");
+                Pattern pattern1 = Pattern.compile("[+\\-*/]");
                 Matcher matcher = pattern.matcher(line);
-                if (line.charAt(1) == '+') {
-                    textField.setText((Integer.parseInt(line.charAt(0)) + Integer.parseInt(line.)));
+                Matcher matcher1 = pattern1.matcher(line);
+                ArrayList<Double> numbers = new ArrayList<>();
+                ArrayList<Character> znaki = new ArrayList<>();
+                while (matcher.find()) {
+                    numbers.add(Double.valueOf(matcher.group()));
                 }
+                while (matcher1.find()) {
+                    znaki.add(matcher1.group().charAt(0));
+                }
+                int znak = find(znaki, '*');
+                Calculate(numbers, znaki);
+                String value = numbers.get(0).toString();
+                textField.setText(value);
             }
         });
         add(textField);
@@ -71,5 +83,55 @@ public class fourth extends JFrame  {
 
     public static void main(String[] args) {
         new fourth();
+    }
+
+
+    public static int find(ArrayList<Character> arr, Character ch) {
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr.get(i) == ch) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    public static void Calculate(ArrayList<Double> numbers, ArrayList<Character> signs) {
+        Character[] allSigns = {'*', '/', '+', '-'};
+        Double res;
+        for (Character ch: allSigns) {
+            int index = find(signs, ch);
+            while (index != -1) {
+                signs.remove(index);
+                try {
+                   res = result(numbers.get(index), numbers.get(index + 1), ch);
+                } catch (Exception e) {
+                    return;
+                }
+                numbers.set(index, res);
+                numbers.remove(index + 1);
+                index = find(signs, '-');;
+            }
+        }
+    }
+
+
+    public static Double result(Double a, Double b, Character ch) throws Exception {
+        switch (ch) {
+            case '+':
+                return a + b;
+            case '-':
+                return a - b;
+            case '*':
+                return a * b;
+            case '/':
+                if (b == 0) {
+                    throw new Exception("Деление на ноль!");
+                }
+                else {
+                    return a / b;
+                }
+        }
+        return a;
     }
 }
