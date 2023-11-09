@@ -2,6 +2,8 @@ package pr24.second;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
     JTextArea textArea = new JTextArea();
@@ -15,6 +17,20 @@ public class Main extends JFrame {
         super("Редактор");
         setSize(400, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        nnew.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IDocument document = IDocumentFactory.getIDocument(new TextDocumentFactory());
+                document.print();
+            }
+        });
+        open.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IDocument document = IDocumentFactory.getIDocument(new TextDocumentFactory());
+                document.open();
+            }
+        });
         file.add(nnew);
         file.add(open);
         file.add(save);
